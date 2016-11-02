@@ -1,0 +1,49 @@
+<html ng-app='lecture'>
+  <head>
+      <link rel="stylesheet" type="text/css" href="main.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  </head>
+
+  <body ng-controller="HeaderController as controller">
+
+  <table>
+  	<thead>
+  		<tr>
+  			<th>Name</th>
+  			<th>Price</th>
+  			<th>Quantity</th>
+  			<th>Color</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr ng-repeat="data in controller.data">
+  			<td>{{data.name}}</td>
+  			<td>{{(data.price-data.discount)*1.065 | currency}} <img ng-show="data.discount>0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png"></td>
+  			<td>
+
+  			{{data.quantity}}
+
+  			<button ng-click="controller.change('up',data)">+1</button>
+  			<button ng-click="controller.change('down',data)">-1</button>
+
+  			</td>
+  			<td>{{data.color}}</td>
+  		</tr>
+  	</tbody>
+  </table>
+
+  <form ng-submit="controller.addItem(controller.form)">
+  	<input placeholder="Name" ng-model="controller.form.name">
+  	<input placeholder="Price" ng-model="controller.form.price">
+  	<input placeholder="Discount" ng-model="controller.form.discount">
+  	<input placeholder="Color" ng-model="controller.form.color">
+  	<input placeholder="Quantity" ng-model="controller.form.quantity">
+  	<button type="submit">Submit</button>
+  </form>
+
+  {{controller.form}}
+
+  <script src='main.js'></script>
+  </body>
+
+</html>
